@@ -1,0 +1,1395 @@
+PREFIX rr: <http://www.w3.org/ns/r2rml#>
+PREFIX bd: <http://purl.bacdive.de/>
+PREFIX bds: <http://purl.bacdive.de/schema/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+
+
+<#Strain>
+    # rr:logicalTable [ rr:sqlQuery """
+    # SELECT * FROM strains 
+    # LEFT JOIN bacphrase USING (ID_strains)
+    # """ ];
+    rr:logicalTable [ rr:tableName "strains" ]  ;
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/strain/{ID_strains}" ;
+        rr:class bds:Strain
+    ] ;
+    # rr:predicateObjectMap [
+    #     rr:predicate dcterms:description ;
+    #     rr:objectMap [ rr:column "phrase" ; rr:termType rr:Literal ]
+    # ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:BacDiveId ;
+        rr:objectMap [ rr:column "ID_strains" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ rr:template "{species} {ID_strains}" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasDomain ;
+        rr:objectMap [ rr:column "domain" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasPhylum ;
+        rr:objectMap [ rr:column "phylum" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasClass ;
+        rr:objectMap [ rr:column "class" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasOrder ;
+        rr:objectMap [ rr:column "ordo" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasFamily ;
+        rr:objectMap [ rr:column "family" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasGenus ;
+        rr:objectMap [ rr:column "genus" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasSpecies ;
+        rr:objectMap [ rr:column "species" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasSpeciesEpithet ;
+        rr:objectMap [ rr:column "species_epithet" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasSubspeciesEpithet ;
+        rr:objectMap [ rr:column "subspecies_epithet" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasDesignation ;
+        rr:objectMap [ rr:column "designation" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasVariant ;
+        rr:objectMap [ rr:column "variant" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate rdfs:hasScientificName ;
+        rr:objectMap [ rr:column "full_scientific_name" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:isTypeStrain ;
+        rr:objectMap [ rr:column "is_type_strain" ; rr:datatype xsd:boolean ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasTypeStrainIdentifier ;
+        rr:objectMap [ rr:column "type_strain" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasReference ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/reference/{ID_reference}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasStrainNumber ;
+        rr:objectMap [ rr:column "strain_number" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasDSMZIDStrain ;
+        rr:objectMap [ rr:column "DSMZ_ID_Strain" ; rr:datatype xsd:int ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasDSMNumber ;
+        rr:objectMap [ rr:column "DSM_num" ; rr:datatype xsd:int ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasBacDiveID ;
+        rr:objectMap [ rr:column "BacDive_ID" ; rr:datatype xsd:int ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:modified ;
+        rr:objectMap [ rr:column "last_change" ; rr:datatype xsd:dateTime ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasStrainsLPSNID ;
+        rr:objectMap [ rr:column "strains_lpsn_id" ; rr:datatype xsd:int ]
+    ] .
+
+
+
+<#Reference>
+    rr:logicalTable [ rr:tableName "reference" ];
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/reference/{ID_reference}" ;
+        rr:class bds:Reference
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:title ;
+        rr:objectMap [ rr:column "title" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:creator ;
+        rr:objectMap [ rr:column "authors" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:issued ;
+        rr:objectMap [ rr:column "year" ; rr:datatype xsd:gYear ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:identifier ;
+        rr:objectMap [ rr:column "DOI" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasPubMedID ;
+        rr:objectMap [ rr:column "pubmed_ID" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasISBN ;
+        rr:objectMap [ rr:column "ISBN" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasVolume ;
+        rr:objectMap [ rr:column "volume" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasPageRange ;
+        rr:objectMap [ rr:template "{first_page}-{last_page}" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasJournalFullName ;
+        rr:objectMap [ rr:column "journal_full_name" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasJournalAbbreviation ;
+        rr:objectMap [ rr:column "journal_abbreviation" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasBookTitle ;
+        rr:objectMap [ rr:column "book_title" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasEditor ;
+        rr:objectMap [ rr:column "editor" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasPublisher ;
+        rr:objectMap [ rr:column "publisher" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasCatalogueID ;
+        rr:objectMap [ rr:column "catalogue_ID" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasCatalogueInstitution ;
+        rr:objectMap [ rr:column "catalogue_institution" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasDocumentType ;
+        rr:objectMap [ rr:column "doc_type" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate rdfs:seeAlso ;
+        rr:objectMap [ rr:column "URL" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:refersTo ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/reference/{ID_cross_reference}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:modified ;
+        rr:objectMap [ rr:column "last_change" ; rr:datatype xsd:dateTime ]
+    ] .
+
+
+<#Motility>
+    rr:logicalTable [ rr:sqlQuery """
+    SELECT * FROM cell_morphology WHERE manual_annotation != 2
+    AND motility IS NOT NULL
+    """ ];
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/motility/{ID_cell_morphology}" ;
+        rr:class bds:Motility
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ rr:column "motility" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:isMotile ;
+        rr:objectMap [ rr:column "motility" ; rr:datatype xsd:boolean ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasFlagellumArrangement ;
+        rr:objectMap [ rr:column "flagellum_arrangement" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:modified ;
+        rr:objectMap [ rr:column "last_change" ; rr:datatype xsd:dateTime ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasReference ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/reference/{ID_reference}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+    
+    rr:predicateObjectMap [
+        rr:predicate bds:isManuallyAnnotated ;
+        rr:objectMap [ rr:column "manual_annotation" ; rr:datatype xsd:boolean ]
+    ] .
+
+<#GramStrain>
+    rr:logicalTable [ rr:sqlQuery """
+    SELECT * FROM cell_morphology WHERE manual_annotation != 2
+    AND gram_stain IS NOT NULL
+    """ ];
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/motility/{ID_cell_morphology}" ;
+        rr:class bds:GramStrain
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ rr:template "Gram {gram_stain}" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasGramStrain ;
+        rr:objectMap [ rr:column "gram_stain" ; rr:datatype rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:modified ;
+        rr:objectMap [ rr:column "last_change" ; rr:datatype xsd:dateTime ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasReference ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/reference/{ID_reference}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+    
+    rr:predicateObjectMap [
+        rr:predicate bds:isManuallyAnnotated ;
+        rr:objectMap [ rr:column "manual_annotation" ; rr:datatype xsd:boolean ]
+    ] .
+
+<#CellSize>
+    rr:logicalTable [ rr:sqlQuery """
+    SELECT * FROM cell_morphology WHERE manual_annotation != 2
+    AND cell_len IS NOT NULL OR cell_width IS NOT NULL
+    """ ];
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/cell_morphology/{ID_cell_morphology}" ;
+        rr:class bds:CellSize
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ rr:template "{cell_len} {cell_len_unit} x {cell_width} {cell_width_unit}" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasLength ;
+        rr:objectMap [ rr:template "{cell_len}" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasLengthRangeStart ;
+        rr:objectMap [ rr:column "rgStart_len" ; rr:datatype xsd:float ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasLengthRangeEnd ;
+        rr:objectMap [ rr:column "rgEnd_len" ; rr:datatype xsd:float ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasLengthUnit ;
+        rr:objectMap [ rr:template "{cell_len_unit}" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasWidth ;
+        rr:objectMap [ rr:template "{cell_width}" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasWidthRangeStart ;
+        rr:objectMap [ rr:column "rgStart_wid" ; rr:datatype xsd:float ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasWidthRangeEnd ;
+        rr:objectMap [ rr:column "rgEnd_wid" ; rr:datatype xsd:float ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasWidthUnit ;
+        rr:objectMap [ rr:template "{cell_width_unit}" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:modified ;
+        rr:objectMap [ rr:column "last_change" ; rr:datatype xsd:dateTime ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasReference ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/reference/{ID_reference}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+    
+    rr:predicateObjectMap [
+        rr:predicate bds:isManuallyAnnotated ;
+        rr:objectMap [ rr:column "manual_annotation" ; rr:datatype xsd:boolean ]
+    ] .
+    
+<#CellShape>
+    rr:logicalTable [ rr:sqlQuery """
+    SELECT * FROM cell_morphology WHERE manual_annotation != 2
+    AND cell_shape IS NOT NULL
+    """ ];
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/cell_morphology/{ID_cell_morphology}" ;
+        rr:class bds:CellShape
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ rr:column "cell_shape" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:modified ;
+        rr:objectMap [ rr:column "last_change" ; rr:datatype xsd:dateTime ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasReference ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/reference/{ID_reference}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:isManuallyAnnotated ;
+        rr:objectMap [ rr:column "manual_annotation" ; rr:datatype xsd:boolean ]
+    ] .
+
+
+<#CultureMedium>
+    rr:logicalTable [ 
+        rr:sqlQuery """
+        SELECT * FROM culture_medium WHERE manual_annotation != 2
+        """ 
+    ];
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/culture_medium/{ID_culture_medium}" ;
+        rr:class bds:CultureMedium
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ rr:column "medium_name" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasMediumComposition ;
+        rr:objectMap [ rr:column "medium_composition" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasMediaLink ;
+        rr:objectMap [ rr:column "media_link" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasMediumGrowth ;
+        rr:objectMap [ rr:column "medium_growth" ; rr:datatype xsd:boolean ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:providedBy ;
+        rr:objectMap [ rr:column "provided_by" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasReference ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/reference/{ID_reference}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasCultureCondition ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/culture_condition/{ID_culture_condition}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasColonyMorphology ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/colony_morphology/{ID_colony_morphology}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:modified ;
+        rr:objectMap [ rr:column "last_change" ; rr:datatype xsd:dateTime ]
+    ] .
+
+
+<#CultureTemp>
+    rr:logicalTable [ 
+        rr:sqlQuery """
+        SELECT * FROM culture_temp WHERE manual_annotation != 2
+        """ 
+    ];
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/culture_temp/{ID_culture_temp}" ;
+        rr:class bds:CultureTemperature
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ rr:column "temp" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasTemperatureRangeStart ;
+        rr:objectMap [ rr:column "rgStart" ; rr:datatype xsd:float ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasTemperatureRangeEnd ;
+        rr:objectMap [ rr:column "rgEnd" ; rr:datatype xsd:float ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasTestType ;
+        rr:objectMap [ rr:column "test_type" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:growthObserved ;
+        rr:objectMap [ rr:column "ability" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasTemperatureRange ;
+        rr:objectMap [ rr:column "temperature_range" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasReference ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/reference/{ID_reference}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:modified ;
+        rr:objectMap [ rr:column "last_change" ; rr:datatype xsd:dateTime ]
+    ] .
+
+
+<#CulturePH>
+    rr:logicalTable [ 
+        rr:sqlQuery """
+        SELECT * FROM culture_pH WHERE manual_annotation != 2
+        COLLATE latin1_general_ci
+        """ 
+    ];
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/culture_pH/{ID_culture_pH}" ;
+        rr:class bds:CulturePH
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ rr:column "pH" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasPHRangeStart ;
+        rr:objectMap [ rr:column "rgStart" ; rr:datatype xsd:float ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasPHRangeEnd ;
+        rr:objectMap [ rr:column "rgEnd" ; rr:datatype xsd:float ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasPHRangeType ;
+        rr:objectMap [ rr:column "ph_range" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasTestType ;
+        rr:objectMap [ rr:column "test_type" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasTestAbility ;
+        rr:objectMap [ rr:column "ability" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasReference ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/reference/{ID_reference}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:modified ;
+        rr:objectMap [ rr:column "last_change" ; rr:datatype xsd:dateTime ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:isManuallyAnnotated ;
+        rr:objectMap [ rr:column "manual_annotation" ; rr:function rr:equals ; rr:argument "1" ; rr:datatype xsd:boolean ]
+    ] .
+
+<#OxygenTolerance>
+    rr:logicalTable [ 
+        rr:sqlQuery """
+        SELECT * FROM oxygen_tolerance WHERE manual_annotation != 2
+        """ 
+    ];
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/oxygen_tolerance/{ID_oxygen_tolerance}" ;
+        rr:class bds:OxygenTolerance
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasOxygenTolerance ;
+        rr:objectMap [ rr:column "oxygen_tol" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasReference ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/reference/{ID_reference}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:modified ;
+        rr:objectMap [ rr:column "last_change" ; rr:datatype xsd:dateTime ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:isManuallyAnnotated ;
+        rr:objectMap [ rr:column "manual_annotation" ; rr:function rr:equals ; rr:argument "1" ; rr:datatype xsd:boolean ]
+    ] .
+
+
+    # ORIGIN table is seperated
+
+<#LocationOfOrigin>
+    rr:logicalTable [ 
+        rr:sqlQuery """
+        SELECT * FROM origin
+        WHERE geo_loc_name IS NOT NULL OR country IS NOT NULL
+        """ 
+    ];
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/location/{ID_origin}" ;
+        rr:class bds:LocationOfOrigin ;
+    ] ;
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ rr:template "{geo_loc_name}, {country}" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasLocation ;
+        rr:objectMap [ rr:column "geo_loc_name" ; rr:datatype xsd:float ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasCountry ;
+        rr:objectMap [ rr:column "country" ; rr:datatype xsd:float ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasLatitude ;
+        rr:objectMap [ rr:column "latitude" ; rr:datatype xsd:float ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasLongitude ;
+        rr:objectMap [ rr:column "longitude" ; rr:datatype xsd:float ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:modified ;
+        rr:objectMap [ rr:column "last_change" ; rr:datatype xsd:dateTime ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:isManuallyAnnotated ;
+        rr:objectMap [ rr:column "manual_annotation" ; rr:function rr:equals ; rr:argument "1" ; rr:datatype xsd:boolean ]
+    ] .
+
+<#IsolationSource>
+    rr:logicalTable [ 
+        rr:sqlQuery """
+        SELECT * FROM origin
+        WHERE sample_type IS NOT NULL
+        """ 
+    ];
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/isolation/{ID_origin}" ;
+        rr:class bds:IsolationSource ;
+    ] ;
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ rr:template "{sample_type}" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:modified ;
+        rr:objectMap [ rr:column "last_change" ; rr:datatype xsd:dateTime ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:isManuallyAnnotated ;
+        rr:objectMap [ rr:column "manual_annotation" ; rr:function rr:equals ; rr:argument "1" ; rr:datatype xsd:boolean ]
+    ] .
+
+
+<#EnrichmentProcedure>
+    rr:logicalTable [ 
+        rr:sqlQuery """
+        SELECT * FROM origin
+        WHERE enrichment_cult_name IS NOT NULL
+        """ 
+    ];
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/enrichment/{ID_origin}" ;
+        rr:class bds:EnrichmentProcedure ;
+    ] ;
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ rr:template "{enrichment_cult_name}" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:modified ;
+        rr:objectMap [ rr:column "last_change" ; rr:datatype xsd:dateTime ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:isManuallyAnnotated ;
+        rr:objectMap [ rr:column "manual_annotation" ; rr:function rr:equals ; rr:argument "1" ; rr:datatype xsd:boolean ]
+    ] .
+
+
+<#ColonyMorphology>
+    rr:logicalTable [ 
+        rr:sqlQuery """
+        SELECT * FROM colony_morphology WHERE manual_annotation != 2
+        """ 
+    ];
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/colony_morphology/{ID_colony_morphology}" ;
+        rr:class bds:ColonyMorphology
+    ] ;
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ rr:column "medium_name" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasMediumComposition ;
+        rr:objectMap [ rr:column "medium_composition" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasColonyLength ;
+        rr:objectMap [ rr:column "colony_len" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasColonyLengthRangeStart ;
+        rr:objectMap [ rr:column "rgStart_len" ; rr:datatype xsd:float ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasColonyLengthRangeEnd ;
+        rr:objectMap [ rr:column "rgEnd_len" ; rr:datatype xsd:float ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasColonyWidth ;
+        rr:objectMap [ rr:column "colony_width" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasColonyWidthRangeStart ;
+        rr:objectMap [ rr:column "rgStart_wid" ; rr:datatype xsd:float ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasColonyWidthRangeEnd ;
+        rr:objectMap [ rr:column "rgEnd_wid" ; rr:datatype xsd:float ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasColonyShape ;
+        rr:objectMap [ rr:column "colony_shape" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasColonyColor ;
+        rr:objectMap [ rr:column "colony_color" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasIncubationPeriod ;
+        rr:objectMap [ rr:column "incubation_period" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasIncubationPeriodRangeStart ;
+        rr:objectMap [ rr:column "rgStart" ; rr:datatype xsd:float ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasIncubationPeriodRangeEnd ;
+        rr:objectMap [ rr:column "rgEnd" ; rr:datatype xsd:float ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasHemolysisType ;
+        rr:objectMap [ rr:column "hemolysis_type" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasHemolysisAbility ;
+        rr:objectMap [ rr:column "hemolysis_ability" ; rr:datatype xsd:boolean ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasReference ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/reference/{ID_reference}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:modified ;
+        rr:objectMap [ rr:column "last_change" ; rr:datatype xsd:dateTime ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:isManuallyAnnotated ;
+        rr:objectMap [ rr:column "manual_annotation" ; rr:function rr:equals ; rr:argument "1" ; rr:datatype xsd:boolean ]
+    ] .
+
+
+<#Halophily>
+    rr:logicalTable [ 
+        rr:sqlQuery """
+        SELECT * FROM halophily WHERE manual_annotation != 2
+        """ 
+    ];
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/halophily/{ID_halophily}" ;
+        rr:class bds:Halophily
+    ] ;
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ rr:template "{halophily} | {salt_concentration} %" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasSaltType ;
+        rr:objectMap [ rr:column "salt" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasSaltConcentration ;
+        rr:objectMap [ rr:column "salt_concentration" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasSaltConcentrationRangeStart ;
+        rr:objectMap [ rr:column "rgStart" ; rr:datatype xsd:float ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasSaltConcentrationRangeEnd ;
+        rr:objectMap [ rr:column "rgEnd" ; rr:datatype xsd:float ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasSaltConcentrationUnit ;
+        rr:objectMap [ rr:column "salt_concentration_unit" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasTestAbility ;
+        rr:objectMap [ rr:column "ability" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasTestType ;
+        rr:objectMap [ rr:column "test_type" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasReference ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/reference/{ID_reference}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:modified ;
+        rr:objectMap [ rr:column "last_change" ; rr:datatype xsd:dateTime ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:isManuallyAnnotated ;
+        rr:objectMap [ rr:column "manual_annotation" ; rr:function rr:equals ; rr:argument "1" ; rr:datatype xsd:boolean ]
+    ] .
+
+
+<#SporeFormation>
+    rr:logicalTable [ 
+        rr:sqlQuery """
+        SELECT 
+            *,
+            CASE 
+                WHEN ability = 1 THEN 'spore-forming'
+                ELSE 'non spore-forming'
+            END AS spore_formation_label
+        FROM spore_formation 
+        WHERE manual_annotation != 2
+        """ 
+    ];
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/spore_formation/{ID_spore_formation}" ;
+        rr:class bds:SporeFormation
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ rr:column "spore_formation_label" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasAbility ;
+        rr:objectMap [ rr:column "ability" ; rr:datatype xsd:boolean ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasSporeType ;
+        rr:objectMap [ rr:column "type" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate rdfs:comment ;
+        rr:objectMap [ rr:column "description" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasReference ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/reference/{ID_reference}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:modified ;
+        rr:objectMap [ rr:column "last_change" ; rr:datatype xsd:dateTime ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:isManuallyAnnotated ;
+        rr:objectMap [ rr:column "manual_annotation" ; rr:function rr:equals ; rr:argument "1" ; rr:datatype xsd:boolean ]
+    ] .
+
+
+<#RiskAssessment>
+    rr:logicalTable [ 
+        rr:sqlQuery """
+        SELECT 
+            *,
+            CASE 
+                WHEN pathogenicity_human = 1 THEN 'yes'
+                WHEN pathogenicity_human = 1 THEN 'yes, in single cases'
+                ELSE 'no'
+            END AS pathogenicity_human_label,
+            CASE 
+                WHEN pathogenicity_animal = 1 THEN 'yes'
+                WHEN pathogenicity_animal = 1 THEN 'yes, in single cases'
+                ELSE 'no'
+            END AS pathogenicity_animal_label,
+            CASE 
+                WHEN pathogenicity_plant = 1 THEN 'yes'
+                WHEN pathogenicity_plant = 1 THEN 'yes, in single cases'
+                ELSE 'no'
+            END AS pathogenicity_plant_label
+        FROM risk_assessment 
+        WHERE manual_annotation != 2
+        """ 
+    ];
+    
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/risk_assessment/{ID_risk_assessment}" ;
+        rr:class bds:RiskAssessment
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ rr:template "Risk group {biosafety_level}" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasBiosafetyLevel ;
+        rr:objectMap [ rr:column "biosafety_level" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate rdfs:comment ;
+        rr:objectMap [ rr:column "biosafety_level_comment" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:isHumanPathogen ;
+        rr:objectMap [ rr:column "pathogenicity_human_label" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:isAnimalPathogen ;
+        rr:objectMap [ rr:column "pathogenicity_animal_label" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:isPlantPathogen ;
+        rr:objectMap [ rr:column "pathogenicity_plant_label" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasReference ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/reference/{ID_reference}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:modified ;
+        rr:objectMap [ rr:column "last_change" ; rr:datatype xsd:dateTime ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:isManuallyAnnotated ;
+        rr:objectMap [ rr:column "manual_annotation" ; rr:function rr:equals ; rr:argument "1" ; rr:datatype xsd:boolean ]
+    ] .
+
+
+<#Enzyme>
+    rr:logicalTable [ 
+        rr:sqlQuery """
+        SELECT *
+        FROM enzymes 
+        WHERE manual_annotation != 2
+        """ 
+    ];
+    
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/enzyme/{ID_enzymes}" ;
+        rr:class bds:Enzyme
+    ] ;
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ rr:column "enzyme" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasActivity ;
+        rr:objectMap [ rr:column "activity" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasECNumber ;
+        rr:objectMap [ rr:column "ec_number" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasReference ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/reference/{ID_reference}" ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate dcterms:modified ;
+        rr:objectMap [ rr:column "last_change" ; rr:datatype xsd:dateTime ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:isManuallyAnnotated ;
+        rr:objectMap [ rr:column "manual_annotation" ; rr:function rr:equals ; rr:argument "1" ; rr:datatype xsd:boolean ]
+    ] .
+
+<#Pigmentation>
+    rr:logicalTable [ 
+        rr:sqlQuery """
+        SELECT 
+            ID_pigmentation,
+            IFNULL(pigment_name, pigment_color) as pigment_label,
+            pigment_name,
+            pigment_color,
+            pigment_production,
+            ID_strains,
+            ID_reference,
+            manual_annotation,
+            last_change
+        FROM pigmentation 
+        WHERE manual_annotation != 2
+        """ 
+    ];
+
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/pigmentation/{ID_pigmentation}" ;
+        rr:class bds:Pigmentation
+    ] ;
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ rr:column "pigment_label" ; rr:termType rr:Literal ]
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate bds:hasPigmentName ;
+        rr:objectMap [ 
+            rr:column "pigment_name" ;
+            rr:termType rr:Literal ;
+            rr:datatype xsd:string ;
+        ]
+    ] ;
+    
+    rr:predicateObjectMap [
+        rr:predicate bds:hasPigmentColor ;
+        rr:objectMap [ 
+            rr:column "pigment_color" ;
+            rr:termType rr:Literal ;
+            rr:datatype xsd:string ;
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:hasPigmentProduction ;
+        rr:objectMap [ 
+            rr:column "pigment_production" ;
+            rr:termType rr:Literal ;
+            rr:datatype xsd:boolean ;
+        ]
+    ] ;
+    
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+    
+    rr:predicateObjectMap [
+        rr:predicate bds:hasReference ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/reference/{ID_reference}" ]
+    ] ;
+    
+    rr:predicateObjectMap [
+        rr:predicate dcterms:modified ;
+        rr:objectMap [ rr:column "last_change" ; rr:datatype xsd:dateTime ]
+    ] ;
+    
+    rr:predicateObjectMap [
+        rr:predicate bds:isManuallyAnnotated ;
+        rr:objectMap [ rr:column "manual_annotation" ; rr:function rr:equals ; rr:argument "1" ; rr:datatype xsd:boolean ]
+    ] .
+
+
+<#Sequence16S>
+    rr:logicalTable [ 
+        rr:sqlQuery """
+        SELECT 
+            ID_strains,
+            sequence_acc,
+            tax_id,
+            sequence_length,
+            sequence_name,
+            link_db,
+            silva,
+            ID_reference,
+            manual_annotation,
+            last_change
+        FROM sequence_16S 
+        WHERE manual_annotation != 2
+        """ 
+    ];
+
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/sequence_16S/{sequence_acc}" ;
+        rr:class bds:16SSequence
+    ] ;
+    
+    rr:predicateObjectMap [
+        rr:predicate bds:hasAccession ;
+        rr:objectMap [ 
+            rr:column "sequence_acc" ;
+            rr:termType rr:Literal ;
+            rr:datatype xsd:string ;
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:hasTaxId ;
+        rr:objectMap [ 
+            rr:column "tax_id" ;
+            rr:datatype xsd:integer ;
+        ]
+    ] ;
+    
+    rr:predicateObjectMap [
+        rr:predicate bds:hasSequenceLength ;
+        rr:objectMap [ 
+            rr:column "sequence_length" ;
+            rr:datatype xsd:integer ;
+        ]
+    ] ;
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ 
+            rr:column "sequence_name" ;
+            rr:termType rr:Literal ;
+            rr:datatype xsd:string ;
+        ]
+    ] ;
+    
+    rr:predicateObjectMap [
+        rr:predicate bds:fromSequenceDB ;
+        rr:objectMap [ 
+            rr:column "link_db" ;
+            rr:termType rr:Literal ;
+            rr:datatype xsd:string ;
+        ]
+    ] ;    
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+    
+    rr:predicateObjectMap [
+        rr:predicate bds:hasReference ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/reference/{ID_reference}" ]
+    ] ;
+    
+    rr:predicateObjectMap [
+        rr:predicate dcterms:modified ;
+        rr:objectMap [ rr:column "last_change" ; rr:datatype xsd:dateTime ]
+    ] ;
+    
+    rr:predicateObjectMap [
+        rr:predicate bds:isManuallyAnnotated ;
+        rr:objectMap [ rr:column "manual_annotation" ; rr:function rr:equals ; rr:argument "1" ; rr:datatype xsd:boolean ]
+    ] .
+
+
+<#SequenceGenome>
+    rr:logicalTable [ 
+        rr:sqlQuery """
+        SELECT 
+            ID_strains,
+            sequence_name,
+            sequence_acc,
+            assembly_lvl,
+            tax_id,
+            source_db,
+            ID_reference,
+            manual_annotation
+        FROM sequence_genomes 
+        WHERE manual_annotation != 2
+        """ 
+    ];
+
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/sequence_genomes/{sequence_acc}" ;
+        rr:class bds:GenomeSequence
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ 
+            rr:column "sequence_name" ;
+            rr:termType rr:Literal ;
+            rr:datatype xsd:string ;
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:hasAccession ;
+        rr:objectMap [ 
+            rr:column "sequence_acc" ;
+            rr:termType rr:Literal ;
+            rr:datatype xsd:string ;
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:hasAssemblyLevel ;
+        rr:objectMap [ 
+            rr:column "assembly_lvl" ;
+            rr:termType rr:Literal ;
+            rr:datatype xsd:string ;
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:hasTaxId ;
+        rr:objectMap [ 
+            rr:column "tax_id" ;
+            rr:datatype xsd:integer ;
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:fromSequenceDB ;
+        rr:objectMap [ 
+            rr:column "source_db" ;
+            rr:termType rr:Literal ;
+            rr:datatype xsd:string ;
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:hasReference ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/reference/{ID_reference}" ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:isManuallyAnnotated ;
+        rr:objectMap [ rr:column "manual_annotation" ; rr:function rr:equals ; rr:argument "1" ; rr:datatype xsd:boolean ]
+    ] .
+
+
+
+<#StrainSynonym>
+    rr:logicalTable [ 
+        rr:sqlQuery """
+        SELECT 
+            ID_strain_synonyms,
+            strain_synonym,
+            is_strain_number,
+            link,
+            ID_strains,
+            ID_reference,
+            manual_annotation
+        FROM strain_synonyms 
+        WHERE manual_annotation != 2
+        """ 
+    ];
+
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/strain_synonym/{ID_strain_synonyms}" ;
+        rr:class bds:StrainSynonym
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ 
+            rr:column "strain_synonym" ;
+            rr:termType rr:Literal ;
+            rr:datatype xsd:string ;
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:isCollectionNumber ;
+        rr:objectMap [ 
+            rr:column "is_strain_number" ;
+            rr:datatype xsd:boolean ;
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:hasLink ;
+        rr:objectMap [ 
+            rr:column "link" ;
+            rr:termType rr:Literal ;
+            rr:datatype xsd:string ;
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:hasReference ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/reference/{ID_reference}" ]
+    ] ;
+
+
+    rr:predicateObjectMap [
+        rr:predicate bds:isManuallyAnnotated ;
+        rr:objectMap [ rr:column "manual_annotation" ; rr:function rr:equals ; rr:argument "1" ; rr:datatype xsd:boolean ]
+    ] .
+
+
+<#NutritionType>
+    rr:logicalTable [ 
+        rr:sqlQuery """
+        SELECT 
+            ID_nutrition_type,
+            nutrition_type,
+            ID_strains,
+            ID_reference,
+            manual_annotation
+        FROM nutrition_type 
+        WHERE manual_annotation != 2
+        """ 
+    ];
+
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/nutrition_type/{ID_nutrition_type}" ;
+        rr:class bds:NutritionType
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ 
+            rr:column "nutrition_type" ;
+            rr:termType rr:Literal ;
+            rr:datatype xsd:string ;
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:hasReference ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/reference/{ID_reference}" ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:isManuallyAnnotated ;
+        rr:objectMap [ rr:column "manual_annotation" ; rr:function rr:equals ; rr:argument "1" ; rr:datatype xsd:boolean ]
+    ] .
+
+
+<#GCContent>
+    rr:logicalTable [ 
+        rr:sqlQuery """
+        SELECT 
+            ID_GC_content,
+            GC_content,
+            rgStart,
+            rgEnd,
+            GC_method,
+            ID_strains,
+            ID_reference,
+            manual_annotation,
+            last_change
+        FROM GC_content 
+        WHERE manual_annotation != 2
+        """ 
+    ];
+
+    rr:subjectMap [
+        rr:template "http://purl.bacdive.de/gc_content/{ID_GC_content}" ;
+        rr:class bds:GCContent
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label ;
+        rr:objectMap [ 
+            rr:template "{GC_content} mol%" ;
+            rr:termType rr:Literal ;
+            rr:datatype xsd:string ;
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:hasGCContentRangeStart ;
+        rr:objectMap [ rr:column "rgStart" ; rr:datatype xsd:float ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:hasGCContentRangeEnd ;
+        rr:objectMap [ rr:column "rgEnd" ; rr:datatype xsd:float ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:hasGCMethod ;
+        rr:objectMap [ 
+            rr:column "GC_method" ;
+            rr:termType rr:Literal ;
+            rr:datatype xsd:string ;
+        ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:describesStrain ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/strain/{ID_strains}" ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:hasReference ;
+        rr:objectMap [ rr:template "http://purl.bacdive.de/reference/{ID_reference}" ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:modified ;
+        rr:objectMap [ rr:column "last_change" ; rr:datatype xsd:dateTime ]
+    ] ;
+
+    rr:predicateObjectMap [
+        rr:predicate bds:isManuallyAnnotated ;
+        rr:objectMap [ rr:column "manual_annotation" ; rr:function rr:equals ; rr:argument "1" ; rr:datatype xsd:boolean ]
+    ] .
